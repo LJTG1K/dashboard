@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { LogoutButton } from './components/LogoutButton'
 
 export const metadata: Metadata = {
   title: 'Negan Dashboard',
@@ -43,6 +44,7 @@ export default function RootLayout({
             </nav>
             <div className="sidebar-footer">
               <p className="text-sm">Last updated: May 12, 2026</p>
+              <LogoutButton />
             </div>
           </aside>
           <main className="main-content">
