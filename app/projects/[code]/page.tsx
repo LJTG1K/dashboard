@@ -2,13 +2,7 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getProject, projects } from '@/lib/projects'
-
-export function generateStaticParams() {
-  return projects.map((project) => ({
-    code: project.code,
-  }))
-}
+import { getProject } from '@/lib/projects'
 
 export default function ProjectPage() {
   const params = useParams<{ code: string }>()
