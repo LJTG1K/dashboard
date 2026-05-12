@@ -3,9 +3,9 @@ import { getProject, projects } from '@/lib/projects'
 import { notFound } from 'next/navigation'
 
 interface PageProps {
-  params: {
+  params: Promise<{
     code: string
-  }
+  }>
 }
 
 export function generateStaticParams() {
@@ -14,8 +14,9 @@ export function generateStaticParams() {
   }))
 }
 
-export default function ProjectPage({ params }: PageProps) {
-  const project = getProject(params.code.toUpperCase())
+export default async function ProjectPage({ params }: PageProps) {
+  const { code } = await params
+  const project = getProject(code.toUpperCase())
 
   if (!project) {
     notFound()
