@@ -19,6 +19,35 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    code: 'JARVIS',
+    name: 'Negan Evolution — Personal Operating System',
+    emoji: '🤖',
+    description: 'Transform from reactive assistant to proactive, voice-first POS with persistent memory and autonomous agency',
+    status: 'optimizing',
+    priority: 'VERY HIGH',
+    lastUpdate: '2026-05-12',
+    metrics: [
+      { label: 'Status', value: 'Phase 1: Foundation' },
+      { label: 'Core Pillars', value: '4 (Memory, Voice, Agency, Persona)' },
+      { label: 'Timeline', value: '20+ weeks (phased)' },
+      { label: 'Current Focus', value: 'Memory Systems' },
+    ],
+    nextSteps: [
+      'Week 1: Memory audit + relational indexing',
+      'Week 2: Proactive context recall',
+      'Week 3: Structured logging system',
+      'Week 4: Cross-project relational mapping',
+      'Phase 2: Voice integration (Weeks 5-8)',
+      'Phase 3: Autonomous agency (Weeks 9-12)',
+      'Phase 4: Hardware integration (Weeks 13-16)',
+    ],
+    resources: [
+      { label: 'README (Philosophy & Pillars)', url: '/projects/JARVIS' },
+      { label: 'STATUS (Phase Roadmap)', url: '/projects/JARVIS#status' },
+      { label: 'Technical Assets', url: '/projects/JARVIS#assets' },
+    ],
+  },
+  {
     code: 'RAPID',
     name: 'Sugargoo Marketplace Gateway',
     emoji: '🚀',
