@@ -55,11 +55,10 @@ export async function GET(
       headers: {
         'Content-Type': 'text/markdown; charset=utf-8',
         'Content-Disposition': `attachment; filename="${code}_${file}"`,
-        'Content-Length': Buffer.byteLength(content),
+        'Content-Length': String(Buffer.byteLength(content)),
       },
     })
   } catch (error) {
-    console.error('File download error:', error)
     return NextResponse.json(
       { error: 'Failed to download file' },
       { status: 500 }
