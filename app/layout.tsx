@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Footer from './footer'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -48,7 +47,6 @@ export default function RootLayout({
           </aside>
           <main className="main-content">
             {children}
-            <Footer />
           </main>
         </div>
       </body>
