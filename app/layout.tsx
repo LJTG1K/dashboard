@@ -13,6 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head />
       <body>
         <div className="dashboard-container">
           <aside className="sidebar">
@@ -24,16 +25,16 @@ export default function RootLayout({
               <a href="/" className="nav-link">
                 📊 Dashboard
               </a>
-              <a href="/#rapid" className="nav-link">
+              <a href="/projects/RAPID" className="nav-link">
                 🚀 RAPID
               </a>
-              <a href="/#blanks" className="nav-link">
+              <a href="/projects/BLANKS" className="nav-link">
                 📈 BLANKS
               </a>
-              <a href="/#sugargoo" className="nav-link">
+              <a href="/projects/SUGARGOO" className="nav-link">
                 🛒 SUGARGOO
               </a>
-              <a href="/#gtoy" className="nav-link">
+              <a href="/projects/GTOY" className="nav-link">
                 🎴 GTOY
               </a>
             </nav>
