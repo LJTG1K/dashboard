@@ -95,25 +95,13 @@ export default function ProjectPage() {
         </p>
         <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
           {project.resources?.map((resource, idx) => {
-            const isInternalFile = resource.url.startsWith('/projects/')
-            const fileName = isInternalFile ? resource.url.split('/').pop() : null
-            const projectCode = isInternalFile ? resource.url.split('/')[2] : null
-            const fileType = fileName?.split('.')[0] || 'file'
+            const isMarkdownFile = resource.url.includes('.md')
             
             return (
               <button
                 key={idx}
                 onClick={() => {
-                  if (isInternalFile && projectCode && fileName) {
-                    // Download the file
-                    const link = document.createElement('a')
-                    link.href = `/api/files/${projectCode}/${fileName}`
-                    link.download = `${projectCode}_${fileName}`
-                    link.click()
-                  } else {
-                    // Open external link
-                    window.open(resource.url, '_blank')
-                  }
+                  window.open(resource.url, '_blank')
                 }}
                 style={{
                   padding: '1rem',
@@ -138,7 +126,7 @@ export default function ProjectPage() {
               >
                 <div style={{ marginBottom: '0.25rem' }}>{resource.label}</div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)', marginTop: '0.25rem' }}>
-                  {isInternalFile ? `📥 Download (${fileType})` : '🔗 Open'}
+                  {isMarkdownFile ? '📄 View' : '🔗 Open'}
                 </div>
               </button>
             )
