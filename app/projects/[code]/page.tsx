@@ -1,12 +1,8 @@
-import Link from 'next/link'
-import { getProject, projects } from '@/lib/projects'
-import { notFound } from 'next/navigation'
+'use client'
 
-interface PageProps {
-  params: Promise<{
-    code: string
-  }>
-}
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { getProject, projects } from '@/lib/projects'
 
 export function generateStaticParams() {
   return projects.map((project) => ({
@@ -14,12 +10,20 @@ export function generateStaticParams() {
   }))
 }
 
-export default async function ProjectPage({ params }: PageProps) {
-  const { code } = await params
-  const project = getProject(code.toUpperCase())
+export default function ProjectPage() {
+  const params = useParams<{ code: string }>()
+  const project = getProject(params.code.toUpperCase())
 
   if (!project) {
-    notFound()
+    return (
+      <div className="card">
+        <h1>Project not found</h1>
+        <p className="text-gray-600">The project "<code>{params.code}</code>" doesn't exist.</p>
+        <Link href="/" style={{ color: 'var(--primary)', textDecoration: 'none' }}>
+          ← Back to Dashboard
+        </Link>
+      </div>
+    )
   }
 
   return (
