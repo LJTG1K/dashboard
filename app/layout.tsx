@@ -25,6 +25,9 @@ export default function RootLayout({
               <a href="/" className="nav-link">
                 📊 Dashboard
               </a>
+              <a href="/projects/JARVIS" className="nav-link">
+                🤖 JARVIS
+              </a>
               <a href="/projects/RAPID" className="nav-link">
                 🚀 RAPID
               </a>

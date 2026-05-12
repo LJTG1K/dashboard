@@ -42,9 +42,9 @@ export const projects: Project[] = [
       'Phase 4: Hardware integration (Weeks 13-16)',
     ],
     resources: [
-      { label: 'README (Philosophy & Pillars)', url: '/projects/JARVIS' },
-      { label: 'STATUS (Phase Roadmap)', url: '/projects/JARVIS#status' },
-      { label: 'Technical Assets', url: '/projects/JARVIS#assets' },
+      { label: 'README (Philosophy & Pillars)', url: '/projects/JARVIS/README.md' },
+      { label: 'STATUS (Phase Roadmap)', url: '/projects/JARVIS/STATUS.md' },
+      { label: 'Technical Assets', url: '/projects/JARVIS/ASSETS.md' },
     ],
   },
   {
@@ -70,7 +70,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Live Site', url: 'https://rapid-five-zeta.vercel.app/listings' },
       { label: 'GitHub', url: 'https://github.com/LJTG1K/rapid.git' },
-      { label: 'Full Details', url: '/projects/RAPID' },
+      { label: 'README', url: '/projects/RAPID/README.md' },
+      { label: 'STATUS', url: '/projects/RAPID/STATUS.md' },
+      { label: 'ASSETS', url: '/projects/RAPID/ASSETS.md' },
     ],
   },
   {
@@ -96,7 +98,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
       { label: 'Shop', url: 'https://gblanks.shop' },
-      { label: 'Full Details', url: '/projects/BLANKS' },
+      { label: 'README', url: '/projects/BLANKS/README.md' },
+      { label: 'STATUS', url: '/projects/BLANKS/STATUS.md' },
+      { label: 'ASSETS', url: '/projects/BLANKS/ASSETS.md' },
     ],
   },
   {
@@ -122,7 +126,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
       { label: 'Zapier', url: 'https://zapier.com' },
-      { label: 'Full Details', url: '/projects/SUGARGOO' },
+      { label: 'README', url: '/projects/SUGARGOO/README.md' },
+      { label: 'STATUS', url: '/projects/SUGARGOO/STATUS.md' },
+      { label: 'ASSETS', url: '/projects/SUGARGOO/ASSETS.md' },
     ],
   },
   {
@@ -147,7 +153,9 @@ export const projects: Project[] = [
     ],
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
-      { label: 'Full Details', url: '/projects/GTOY' },
+      { label: 'README', url: '/projects/GTOY/README.md' },
+      { label: 'STATUS', url: '/projects/GTOY/STATUS.md' },
+      { label: 'ASSETS', url: '/projects/GTOY/ASSETS.md' },
     ],
   },
 ]

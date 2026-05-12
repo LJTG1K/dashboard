@@ -90,35 +90,59 @@ export default function ProjectPage() {
       {/* Resources */}
       <div className="card">
         <h3>🔗 Resources & Links</h3>
+        <p className="text-gray-600" style={{ marginTop: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem' }}>
+          Click to open or download project files
+        </p>
         <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          {project.resources?.map((resource, idx) => (
-            <a
-              key={idx}
-              href={resource.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'block',
-                padding: '1rem',
-                border: '1px solid var(--gray-200)',
-                borderRadius: '0.5rem',
-                textDecoration: 'none',
-                color: 'var(--primary)',
-                fontWeight: 500,
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--primary)'
-                e.currentTarget.style.backgroundColor = 'var(--gray-50)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--gray-200)'
-                e.currentTarget.style.backgroundColor = 'transparent'
-              }}
-            >
-              {resource.label} →
-            </a>
-          ))}
+          {project.resources?.map((resource, idx) => {
+            const isInternalFile = resource.url.startsWith('/projects/')
+            const fileName = isInternalFile ? resource.url.split('/').pop() : null
+            const projectCode = isInternalFile ? resource.url.split('/')[2] : null
+            const fileType = fileName?.split('.')[0] || 'file'
+            
+            return (
+              <button
+                key={idx}
+                onClick={() => {
+                  if (isInternalFile && projectCode && fileName) {
+                    // Download the file
+                    const link = document.createElement('a')
+                    link.href = `/api/files/${projectCode}/${fileName}`
+                    link.download = `${projectCode}_${fileName}`
+                    link.click()
+                  } else {
+                    // Open external link
+                    window.open(resource.url, '_blank')
+                  }
+                }}
+                style={{
+                  padding: '1rem',
+                  border: '1px solid var(--gray-200)',
+                  borderRadius: '0.5rem',
+                  background: 'white',
+                  textDecoration: 'none',
+                  color: 'var(--primary)',
+                  fontWeight: 500,
+                  transition: 'all 0.2s ease',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--primary)'
+                  e.currentTarget.style.backgroundColor = 'var(--gray-50)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--gray-200)'
+                  e.currentTarget.style.backgroundColor = 'white'
+                }}
+              >
+                <div style={{ marginBottom: '0.25rem' }}>{resource.label}</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)', marginTop: '0.25rem' }}>
+                  {isInternalFile ? `📥 Download (${fileType})` : '🔗 Open'}
+                </div>
+              </button>
+            )
+          })}
         </div>
       </div>
 

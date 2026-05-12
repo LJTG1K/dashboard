@@ -339,6 +339,14 @@ h3 {
   background: var(--gray-300);
 }
 
+button {
+  font-family: inherit;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
 /* Tables */
 .table {
   width: 100%;
