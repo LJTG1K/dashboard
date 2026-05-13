@@ -55,7 +55,7 @@ export const projects: Project[] = [
     description: 'Global shoppers → 1,500+ Chinese sellers via Sugargoo',
     status: 'live',
     priority: 'VERY HIGH',
-    lastUpdate: '2026-05-07',
+    lastUpdate: '2026-05-13',
     metrics: [
       { label: 'Brands Live', value: '104' },
       { label: 'Products Available', value: '3M+' },
@@ -67,10 +67,12 @@ export const projects: Project[] = [
       'Analytics setup (Google Analytics 4)',
       'Content marketing strategy',
       'r/FashionReps community outreach',
+      'Shoot video creative concepts for ads',
     ],
     resources: [
       { label: 'Live Site', url: 'https://rapid-five-zeta.vercel.app/listings' },
       { label: 'GitHub', url: 'https://github.com/LJTG1K/rapid.git' },
+      { label: '📺 Video Creative Concepts (@gilly1k)', url: '/api/files/RAPID/CREATIVE_CONCEPTS' },
       { label: 'README', url: '/api/files/RAPID/README' },
       { label: 'STATUS', url: '/api/files/RAPID/STATUS' },
       { label: 'ASSETS', url: '/api/files/RAPID/ASSETS' },
