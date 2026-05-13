@@ -42,10 +42,10 @@ export const projects: Project[] = [
       'Phase 4 (Weeks 13-16): Hardware integration (smart home, sensors)',
     ],
     resources: [
-      { label: '🗓️ Week 1 Plan', url: '/api/files/JARVIS/WEEK1_PLAN' },
-      { label: 'README (Philosophy & Pillars)', url: '/api/files/JARVIS/README' },
-      { label: 'STATUS (Phase Roadmap)', url: '/api/files/JARVIS/STATUS' },
-      { label: 'Technical Assets', url: '/api/files/JARVIS/ASSETS' },
+      { label: '🗓️ Week 1 Plan', url: '/docs/JARVIS/WEEK1_PLAN.md' },
+      { label: 'README (Philosophy & Pillars)', url: '/docs/JARVIS/README.md' },
+      { label: 'STATUS (Phase Roadmap)', url: '/docs/JARVIS/STATUS.md' },
+      { label: 'Technical Assets', url: '/docs/JARVIS/ASSETS.md' },
     ],
   },
   {
@@ -72,10 +72,10 @@ export const projects: Project[] = [
     resources: [
       { label: 'Live Site', url: 'https://rapid-five-zeta.vercel.app/listings' },
       { label: 'GitHub', url: 'https://github.com/LJTG1K/rapid.git' },
-      { label: '📺 Video Creative Concepts (@gilly1k)', url: '/api/files/RAPID/CREATIVE_CONCEPTS' },
-      { label: 'README', url: '/api/files/RAPID/README' },
-      { label: 'STATUS', url: '/api/files/RAPID/STATUS' },
-      { label: 'ASSETS', url: '/api/files/RAPID/ASSETS' },
+      { label: '📺 Video Creative Concepts (@gilly1k)', url: '/docs/RAPID/CREATIVE_CONCEPTS.md' },
+      { label: 'README', url: '/docs/RAPID/README.md' },
+      { label: 'STATUS', url: '/docs/RAPID/STATUS.md' },
+      { label: 'ASSETS', url: '/docs/RAPID/ASSETS.md' },
     ],
   },
   {
@@ -101,9 +101,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
       { label: 'Shop', url: 'https://gblanks.shop' },
-      { label: 'README', url: '/api/files/BLANKS/README' },
-      { label: 'STATUS', url: '/api/files/BLANKS/STATUS' },
-      { label: 'ASSETS', url: '/api/files/BLANKS/ASSETS' },
+      { label: 'README', url: '/docs/BLANKS/README.md' },
+      { label: 'STATUS', url: '/docs/BLANKS/STATUS.md' },
+      { label: 'ASSETS', url: '/docs/BLANKS/ASSETS.md' },
     ],
   },
   {
@@ -129,9 +129,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
       { label: 'Zapier', url: 'https://zapier.com' },
-      { label: 'README', url: '/api/files/SUGARGOO/README' },
-      { label: 'STATUS', url: '/api/files/SUGARGOO/STATUS' },
-      { label: 'ASSETS', url: '/api/files/SUGARGOO/ASSETS' },
+      { label: 'README', url: '/docs/SUGARGOO/README.md' },
+      { label: 'STATUS', url: '/docs/SUGARGOO/STATUS.md' },
+      { label: 'ASSETS', url: '/docs/SUGARGOO/ASSETS.md' },
     ],
   },
   {
@@ -156,15 +156,19 @@ export const projects: Project[] = [
     ],
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
-      { label: 'README', url: '/api/files/GTOY/README' },
-      { label: 'STATUS', url: '/api/files/GTOY/STATUS' },
-      { label: 'ASSETS', url: '/api/files/GTOY/ASSETS' },
+      { label: 'README', url: '/docs/GTOY/README.md' },
+      { label: 'STATUS', url: '/docs/GTOY/STATUS.md' },
+      { label: 'ASSETS', url: '/docs/GTOY/ASSETS.md' },
     ],
   },
 ]
 
 export function getProject(code: string): Project | undefined {
   return projects.find((p) => p.code === code)
+}
+
+export function isFileUrl(url: string): boolean {
+  return url.startsWith('/docs/')
 }
 
 export function getProjectStats() {

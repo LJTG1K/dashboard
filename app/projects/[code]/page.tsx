@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { getProject } from '@/lib/projects'
+import { getProject, isFileUrl } from '@/lib/projects'
 
 export default function ProjectPage() {
   const params = useParams<{ code: string }>()
@@ -95,44 +95,11 @@ export default function ProjectPage() {
         </p>
         <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
           {project.resources?.map((resource, idx) => {
-            const isApiFile = resource.url.includes('/api/files')
-            
             return (
               <button
                 key={idx}
                 onClick={() => {
-                  if (isApiFile) {
-                    // Fetch and display the markdown file
-                    fetch(resource.url)
-                      .then(res => res.json())
-                      .then(data => {
-                        // Open in new window with markdown content
-                        const win = window.open('', '_blank')
-                        if (win) {
-                          win.document.write(`
-                            <html>
-                              <head>
-                                <title>${data.filename}</title>
-                                <style>
-                                  body { font-family: system-ui, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
-                                  h1, h2, h3 { margin-top: 1.5rem; }
-                                  code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
-                                  pre { background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; }
-                                  a { color: #0066cc; }
-                                  ul, ol { margin: 1rem 0; }
-                                </style>
-                              </head>
-                              <body>
-                                <pre>${data.content}</pre>
-                              </body>
-                            </html>
-                          `)
-                        }
-                      })
-                      .catch(err => alert('Error loading file: ' + err.message))
-                  } else {
-                    window.open(resource.url, '_blank')
-                  }
+                  window.open(resource.url, '_blank')
                 }}
                 style={{
                   padding: '1rem',
@@ -157,7 +124,7 @@ export default function ProjectPage() {
               >
                 <div style={{ marginBottom: '0.25rem' }}>{resource.label}</div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)', marginTop: '0.25rem' }}>
-                  {isApiFile ? '📄 View' : '🔗 Open'}
+                  {isFileUrl(resource.url) ? '📄 View' : '🔗 Open'}
                 </div>
               </button>
             )
