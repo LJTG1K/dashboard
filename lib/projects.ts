@@ -42,10 +42,10 @@ export const projects: Project[] = [
       'Phase 4 (Weeks 13-16): Hardware integration (smart home, sensors)',
     ],
     resources: [
-      { label: '🗓️ Week 1 Plan', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/JARVIS/WEEK1_PLAN.md' },
-      { label: 'README (Philosophy & Pillars)', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/JARVIS/README.md' },
-      { label: 'STATUS (Phase Roadmap)', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/JARVIS/STATUS.md' },
-      { label: 'Technical Assets', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/JARVIS/ASSETS.md' },
+      { label: '🗓️ Week 1 Plan', url: '/api/files/JARVIS/WEEK1_PLAN' },
+      { label: 'README (Philosophy & Pillars)', url: '/api/files/JARVIS/README' },
+      { label: 'STATUS (Phase Roadmap)', url: '/api/files/JARVIS/STATUS' },
+      { label: 'Technical Assets', url: '/api/files/JARVIS/ASSETS' },
     ],
   },
   {
@@ -72,10 +72,10 @@ export const projects: Project[] = [
     resources: [
       { label: 'Live Site', url: 'https://rapid-five-zeta.vercel.app/listings' },
       { label: 'GitHub', url: 'https://github.com/LJTG1K/rapid.git' },
-      { label: '📺 Video Creative Concepts (@gilly1k)', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/RAPID/CREATIVE_CONCEPTS.md' },
-      { label: 'README', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/RAPID/README.md' },
-      { label: 'STATUS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/RAPID/STATUS.md' },
-      { label: 'ASSETS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/RAPID/ASSETS.md' },
+      { label: '📺 Video Creative Concepts (@gilly1k)', url: '/api/files/RAPID/CREATIVE_CONCEPTS' },
+      { label: 'README', url: '/api/files/RAPID/README' },
+      { label: 'STATUS', url: '/api/files/RAPID/STATUS' },
+      { label: 'ASSETS', url: '/api/files/RAPID/ASSETS' },
     ],
   },
   {
@@ -101,9 +101,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
       { label: 'Shop', url: 'https://gblanks.shop' },
-      { label: 'README', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/BLANKS/README.md' },
-      { label: 'STATUS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/BLANKS/STATUS.md' },
-      { label: 'ASSETS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/BLANKS/ASSETS.md' },
+      { label: 'README', url: '/api/files/BLANKS/README' },
+      { label: 'STATUS', url: '/api/files/BLANKS/STATUS' },
+      { label: 'ASSETS', url: '/api/files/BLANKS/ASSETS' },
     ],
   },
   {
@@ -129,9 +129,9 @@ export const projects: Project[] = [
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
       { label: 'Zapier', url: 'https://zapier.com' },
-      { label: 'README', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/SUGARGOO/README.md' },
-      { label: 'STATUS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/SUGARGOO/STATUS.md' },
-      { label: 'ASSETS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/SUGARGOO/ASSETS.md' },
+      { label: 'README', url: '/api/files/SUGARGOO/README' },
+      { label: 'STATUS', url: '/api/files/SUGARGOO/STATUS' },
+      { label: 'ASSETS', url: '/api/files/SUGARGOO/ASSETS' },
     ],
   },
   {
@@ -156,9 +156,9 @@ export const projects: Project[] = [
     ],
     resources: [
       { label: 'Ads Manager', url: 'https://www.facebook.com/ads/manager' },
-      { label: 'README', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/GTOY/README.md' },
-      { label: 'STATUS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/GTOY/STATUS.md' },
-      { label: 'ASSETS', url: 'https://raw.githubusercontent.com/LJTG1K/projects/main/GTOY/ASSETS.md' },
+      { label: 'README', url: '/api/files/GTOY/README' },
+      { label: 'STATUS', url: '/api/files/GTOY/STATUS' },
+      { label: 'ASSETS', url: '/api/files/GTOY/ASSETS' },
     ],
   },
 ]
