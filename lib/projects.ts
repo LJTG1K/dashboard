@@ -72,7 +72,8 @@ export const projects: Project[] = [
     resources: [
       { label: 'Live Site', url: 'https://rapid-five-zeta.vercel.app/listings' },
       { label: 'GitHub', url: 'https://github.com/LJTG1K/rapid.git' },
-      { label: '📺 Video Creative Concepts (@gilly1k)', url: '/docs/RAPID/CREATIVE_CONCEPTS.md' },
+      { label: '📺 Video Concepts — Educational (@gilly1k)', url: '/docs/RAPID/CREATIVE_CONCEPTS_REVISED.md' },
+      { label: '📺 Video Concepts — Original', url: '/docs/RAPID/CREATIVE_CONCEPTS.md' },
       { label: 'README', url: '/docs/RAPID/README.md' },
       { label: 'STATUS', url: '/docs/RAPID/STATUS.md' },
       { label: 'ASSETS', url: '/docs/RAPID/ASSETS.md' },
