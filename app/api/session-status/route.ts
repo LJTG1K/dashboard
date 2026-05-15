@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, NextRequest } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 
@@ -9,7 +9,24 @@ let sessionState = {
   currentTask: null as string | null,
 }
 
-export async function GET() {
+function isLocalhost(request: NextRequest): boolean {
+  const host = request.headers.get('host') || ''
+  const forwarded = request.headers.get('x-forwarded-for')
+  const clientIp = forwarded ? forwarded.split(',')[0].trim() : ''
+  
+  return (
+    host.startsWith('localhost') ||
+    host.startsWith('127.0.0.1') ||
+    clientIp === '127.0.0.1' ||
+    clientIp.startsWith('::1')
+  )
+}
+
+export async function GET(request: NextRequest) {
+  // Allow localhost requests to bypass auth
+  if (!isLocalhost(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     // Try to read from a persistent state file if it exists
     const stateFilePath = path.join(process.cwd(), '.session-state.json')
@@ -49,7 +66,11 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  // Allow localhost requests to bypass auth
+  if (!isLocalhost(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
   try {
     const body = await request.json()
     
