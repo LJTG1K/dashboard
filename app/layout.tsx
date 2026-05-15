@@ -26,6 +26,9 @@ export default function RootLayout({
               <a href="/" className="nav-link">
                 📊 Dashboard
               </a>
+              <a href="/negan-face" className="nav-link">
+                🎭 Negan Face
+              </a>
               <a href="/projects/JARVIS" className="nav-link">
                 🤖 JARVIS
               </a>

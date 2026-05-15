@@ -1,0 +1,388 @@
+.face-container {
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* Main Layout */
+.face-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.face-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Face Card */
+.face-card {
+  background: #1e293b;
+  border: 3px solid #7C3AED;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.15);
+  transition: all 0.3s ease;
+}
+
+.face-card:hover {
+  box-shadow: 0 0 50px rgba(124, 58, 237, 0.3);
+}
+
+/* Big Emoji Face */
+.face-emoji {
+  font-size: 5rem;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.face-emoji:hover {
+  transform: scale(1.1);
+}
+
+/* Status Indicator */
+.face-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.status-label {
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Message Text */
+.face-message {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  text-align: center;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Details */
+.face-details {
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.detail-icon {
+  display: inline-block;
+  width: 1.25rem;
+  text-align: center;
+}
+
+.detail-text {
+  flex: 1;
+}
+
+/* State Toggle Button */
+.state-toggle {
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: 100%;
+}
+
+.state-toggle:hover {
+  background: #475569;
+  border-color: #64748b;
+}
+
+.state-toggle:active {
+  transform: scale(0.98);
+}
+
+/* State List Sidebar */
+.state-list {
+  background: #0f172a;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 180px;
+  max-width: 180px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.state-list h3 {
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 0.75rem 0;
+  font-weight: 700;
+}
+
+.state-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid #334155;
+  border-left: 3px solid transparent;
+  border-radius: 4px;
+  color: #cbd5e1;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.state-button:hover {
+  background: #1e293b;
+  border-color: #475569;
+}
+
+.state-button.active {
+  border-color: currentColor;
+  font-weight: 600;
+}
+
+.state-emoji {
+  font-size: 1.25rem;
+  display: inline-block;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.state-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Footer Notes */
+.face-footer {
+  color: #64748b;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #334155;
+  line-height: 1.6;
+}
+
+.footer-note {
+  margin: 0;
+}
+
+/* Animations for each state */
+@keyframes pulse-thinking {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes pulse-waiting {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-deploy {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-typing {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-listen {
+  0%, 100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1.1);
+  }
+}
+
+@keyframes pulse-alert {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes pulse-idle {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Responsive for small screens (Dockmate) */
+@media (max-width: 480px) {
+  .face-container {
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .face-layout {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .state-list {
+    width: 100%;
+    max-width: 100%;
+    order: 2;
+  }
+
+  .face-main {
+    order: 1;
+  }
+
+  .face-emoji {
+    font-size: 4rem;
+  }
+
+  .face-card {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .face-message {
+    font-size: 0.85rem;
+  }
+
+  .detail-row {
+    font-size: 0.75rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .face-container {
+    padding: 0.75rem;
+  }
+
+  .face-emoji {
+    font-size: 3.5rem;
+  }
+
+  .face-card {
+    padding: 1rem;
+  }
+
+  .status-label {
+    font-size: 0.75rem;
+  }
+
+  .face-message {
+    font-size: 0.8rem;
+  }
+
+  .face-details {
+    display: none;
+  }
+}
+
+/* Scrollbar styling for state list */
+.state-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.state-list::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 3px;
+}
+
+.state-list::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+
+.state-list::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
