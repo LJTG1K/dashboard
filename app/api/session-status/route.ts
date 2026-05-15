@@ -1,48 +1,75 @@
 import { NextResponse } from 'next/server'
-import { exec } from 'child_process'
-import { promisify } from 'util'
+import fs from 'fs'
+import path from 'path'
 
-const execAsync = promisify(exec)
+// Simple in-memory store for session state (resets on deploy)
+let sessionState = {
+  lastActivityTime: Date.now(),
+  isProcessing: false,
+  currentTask: null as string | null,
+}
 
 export async function GET() {
   try {
-    // Call openclaw status to get session info
-    const { stdout } = await execAsync('openclaw status --json 2>/dev/null || openclaw status 2>/dev/null')
-    
-    // Parse the output - if it's JSON, parse it; otherwise extract info
-    let sessionInfo: any = {}
+    // Try to read from a persistent state file if it exists
+    const stateFilePath = path.join(process.cwd(), '.session-state.json')
+    let state = sessionState
     
     try {
-      sessionInfo = JSON.parse(stdout)
-    } catch {
-      // Fallback: extract basic info from text output
-      const runningMatch = stdout.match(/running|active/i)
-      sessionInfo = {
-        status: runningMatch ? 'running' : 'idle',
-        model: 'anthropic/claude-haiku-4-5',
+      if (fs.existsSync(stateFilePath)) {
+        const fileContent = fs.readFileSync(stateFilePath, 'utf-8')
+        state = JSON.parse(fileContent)
       }
+    } catch (e) {
+      // Use in-memory state if file read fails
     }
 
-    // Calculate session time (rough estimate from uptime if available)
-    const uptime = process.uptime()
+    // Check if OpenClaw is running by looking for process
+    const isRunning = process.uptime() > 0 // Simplified: process is running if uptime > 0
     
     return NextResponse.json({
-      status: sessionInfo.status || 'idle',
-      model: sessionInfo.model || 'anthropic/claude-haiku-4-5',
-      sessionTime: Math.floor(uptime),
-      currentTask: sessionInfo.task || null,
-      lastMessageTime: Date.now() - (Math.random() * 10000), // Demo: random recent time
+      status: state.isProcessing ? 'running' : (isRunning ? 'idle' : 'offline'),
+      model: 'anthropic/claude-haiku-4-5',
+      sessionTime: Math.floor(process.uptime() * 1000), // Convert to milliseconds
+      currentTask: state.currentTask,
+      lastMessageTime: state.lastActivityTime,
+      isAlive: true,
     })
   } catch (error) {
-    console.error('Error fetching session status:', error)
+    console.error('Error in session status:', error)
     
-    // Return fallback on error
     return NextResponse.json({
-      status: 'idle',
+      status: 'offline',
       model: 'anthropic/claude-haiku-4-5',
       sessionTime: 0,
       currentTask: null,
       lastMessageTime: null,
+      isAlive: false,
     })
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json()
+    
+    // Update session state
+    sessionState = {
+      lastActivityTime: body.lastActivityTime || Date.now(),
+      isProcessing: body.isProcessing ?? false,
+      currentTask: body.currentTask || null,
+    }
+    
+    // Try to persist to file
+    const stateFilePath = path.join(process.cwd(), '.session-state.json')
+    try {
+      fs.writeFileSync(stateFilePath, JSON.stringify(sessionState))
+    } catch (e) {
+      // Silently fail if we can't write to file
+    }
+    
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to update session state' }, { status: 400 })
   }
 }

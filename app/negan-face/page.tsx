@@ -24,25 +24,33 @@ const determineState = (
   subagentInfo: SubagentInfo | null,
   isWaitingOnUser: boolean
 ): FaceState => {
-  // If no session status, idle
-  if (!sessionStatus) return 'idle'
+  // If offline, idle
+  if (!sessionStatus || sessionStatus.status === 'offline') return 'idle'
 
-  // If subagents running, deploying
+  // Priority 1: If subagents running, deploying
   if (subagentInfo?.count ?? 0 > 0) return 'deploying'
 
-  // If waiting on user response, waiting
+  // Priority 2: If waiting on user, waiting
   if (isWaitingOnUser) return 'waiting'
 
-  // If status is running, thinking
+  // Priority 3: If status is running/processing, thinking
   if (sessionStatus.status === 'running') return 'thinking'
 
-  // If last message was just sent, typing
+  // Priority 4: Check if message was just sent (typing state)
   const now = Date.now()
-  if (sessionStatus.lastMessageTime && now - sessionStatus.lastMessageTime < 5000) {
-    return 'typing'
+  if (sessionStatus.lastMessageTime) {
+    const timeSinceMessage = now - sessionStatus.lastMessageTime
+    // Show typing for 5 seconds after a message
+    if (timeSinceMessage < 5000) {
+      return 'typing'
+    }
+    // Show waiting if it's been >30 seconds since last activity
+    if (timeSinceMessage > 30000) {
+      return 'waiting'
+    }
   }
 
-  // Default to listening
+  // Default to listening (idle but ready)
   return 'listening'
 }
 
