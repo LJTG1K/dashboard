@@ -1,0 +1,404 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-05-15T00:00:00Z",
+    "last_updated": "2026-05-15T10:30:00Z",
+    "purpose": "Structured event log for JARVIS Phase 1 - enables queries, audit trails, and proactive context",
+    "schema": "See JARVIS_RELATIONAL_MODEL.md for entity definitions"
+  },
+  "projects": [
+    {
+      "id": "rapid",
+      "name": "RAPID",
+      "full_name": "RAPID Sugargoo Marketplace Gateway",
+      "status": "LIVE",
+      "importance": "CRITICAL",
+      "current_phase": "launch",
+      "start_date": "2026-04-01",
+      "url": "https://rapid-five-zeta.vercel.app",
+      "owner": "lachlan",
+      "next_milestone": "Ads live with first image creatives",
+      "next_milestone_date": "2026-05-20"
+    },
+    {
+      "id": "jarvis",
+      "name": "JARVIS",
+      "full_name": "JARVIS Personal Operating System Evolution",
+      "status": "IN_DEVELOPMENT",
+      "importance": "CRITICAL",
+      "current_phase": "Phase_1_Foundation",
+      "start_date": "2026-05-12",
+      "owner": "negan",
+      "next_milestone": "Week 1 foundation complete (memory audit, logging, relational model)",
+      "next_milestone_date": "2026-05-18"
+    },
+    {
+      "id": "grand_tour",
+      "name": "THE GRAND TOUR",
+      "full_name": "China Seller Partnership Tour",
+      "status": "PLANNING",
+      "importance": "CRITICAL",
+      "current_phase": "Phase_1_Research",
+      "start_date": "2026-05-01",
+      "owner": "lachlan",
+      "next_milestone": "Identify 50+ target sellers",
+      "next_milestone_date": "2026-05-31"
+    },
+    {
+      "id": "blanks",
+      "name": "G BLANKS",
+      "full_name": "G Blanks E-commerce Store",
+      "status": "ACTIVE",
+      "importance": "HIGH",
+      "current_phase": "optimization",
+      "owner": "lachlan",
+      "next_milestone": "Drop CPA to $20-25 AUD",
+      "next_milestone_date": "2026-06-15"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec_rapid_3_campaign_funnel_2026_05_14",
+      "date": "2026-05-14T11:00:00Z",
+      "project": "rapid",
+      "title": "Multi-Campaign Funnel Structure",
+      "context": "$3,000/month budget, need to optimize CAC to $60-120 AUD, 25-50 sign-ups target",
+      "chosen": "3-campaign structure: PROSPECTING (55-60%), RETARGETING (20-25%), TESTING_LOOKALIKE (15-20%)",
+      "rationale": "Separates cold/warm/testing audiences, allows different optimization strategies per funnel stage, better CAC control",
+      "made_by": "negan",
+      "approved_by": "lachlan",
+      "reversibility": "High - can consolidate campaigns anytime",
+      "status": "IMPLEMENTED",
+      "next_review": "2026-05-22"
+    },
+    {
+      "id": "dec_rapid_meta_targeting_advantage_audience_2026_05_14",
+      "date": "2026-05-14T12:30:00Z",
+      "project": "rapid",
+      "title": "Use Advantage Audience Instead of Specific Interests",
+      "context": "Specific interests (Fashion Reps, Sneaker Culture, Luxury Brands) unavailable in Meta library. Needed immediate solution.",
+      "options": [
+        "Use broad Advantage Audience (Meta optimizes, no manual constraints)",
+        "Request custom audience creation (slow, uncertain)",
+        "Use only lookalike audiences (risky for cold traffic)",
+        "Pivot to behavior-based targeting (alternative)"
+      ],
+      "chosen": "Use broad Advantage Audience",
+      "rationale": "Advantage Audience performs well on cold traffic; Meta's algorithm infers audience from behavior + geo. Fastest path to launch without losing performance.",
+      "made_by": "negan",
+      "approved_by": "lachlan",
+      "reversibility": "High - can add interests later if they become available",
+      "impact": "Audience targeting less specific but faster optimization; wider age range (18-65 vs 18-45 target)",
+      "status": "IMPLEMENTED",
+      "next_review": "2026-05-22"
+    },
+    {
+      "id": "dec_rapid_brand_strict_alignment_2026_05_15",
+      "date": "2026-05-15T09:00:00Z",
+      "project": "rapid",
+      "title": "All RAPID Creatives Must Follow Strict Brand Guidelines",
+      "context": "Created 10 image ad briefs and noticed inconsistent brand application in first draft. RAPID has distinct visual identity (black/white/blue, checkerboard, all-caps headlines)",
+      "chosen": "Rewrite all creative briefs with explicit RAPID brand requirements (color palette, typography, signature elements, tone)",
+      "rationale": "Strong brand consistency drives recognition and trust, especially for new marketplace. Brand identity is foundation for ads.",
+      "made_by": "negan",
+      "approved_by": "lachlan",
+      "reversibility": "Medium - can deviate later but not recommended",
+      "status": "IMPLEMENTED",
+      "next_review": "2026-05-25"
+    },
+    {
+      "id": "dec_jarvis_phase_1_foundation_first_2026_05_12",
+      "date": "2026-05-12T14:00:00Z",
+      "project": "jarvis",
+      "title": "Phase 1 Focus: Memory Foundation Before Voice/Agency",
+      "context": "JARVIS roadmap has 5 phases. Need to prioritize: Foundation (memory) is prerequisite for all others.",
+      "chosen": "Phase 1 (Weeks 1-4): Memory audit, relational indexing, structured logging, cross-project mapping",
+      "rationale": "Can't be proactive/autonomous without persistent memory. Foundation must be rock-solid before adding voice, agency, hardware.",
+      "made_by": "negan",
+      "approved_by": "lachlan",
+      "reversibility": "Low - this is foundational architecture decision",
+      "status": "IN_PROGRESS",
+      "next_review": "2026-05-18"
+    }
+  ],
+  "discoveries": [
+    {
+      "id": "disc_meta_interests_unavailable_2026_05_14",
+      "date": "2026-05-14T11:30:00Z",
+      "project": "rapid",
+      "type": "Limitation",
+      "title": "Meta Interest Targeting Limitation - Specific Interests Unavailable",
+      "description": "When setting up RAPID ad sets, discovered that specific interests like 'Fashion Reps', 'Sneaker Culture', 'Supreme' etc. don't exist or aren't accessible in Meta's targeting library for this account.",
+      "significance": "HIGH",
+      "implication": "Had to pivot to Advantage Audience approach; less precise but still effective",
+      "source": "Meta Ads API response during campaign setup",
+      "action": "Created decision log entry, implemented Advantage Audience fallback",
+      "related_docs": ["RAPID_HEARTBEAT_CHECKS.md"]
+    },
+    {
+      "id": "disc_taobao_video_repurpose_opportunity_2026_05_15",
+      "date": "2026-05-15T08:00:00Z",
+      "project": "rapid",
+      "type": "Opportunity",
+      "title": "25K-View Taobao Tutorial Video Can Be Adapted for RAPID",
+      "description": "Lachlan shared YouTube video 'HOW TO BUY FROM TAOBAO UPDATED 2026!' with 25K views from r/FashionReps-aligned creator. Video teaches Taobao buying process but can be completely reframed to position RAPID as the simpler solution.",
+      "significance": "HIGH",
+      "implication": "Organic growth opportunity; could drive significant traffic if adapted properly",
+      "source": "Lachlan shared link",
+      "action": "Created RAPID_VIDEO_EDIT_SUGGESTIONS.md with timestamp-by-timestamp edit recommendations (8 major sections identified for change)",
+      "opportunity_value": "Estimated 5-10K monthly views if adapted correctly",
+      "related_docs": ["RAPID_VIDEO_EDIT_SUGGESTIONS.md"]
+    },
+    {
+      "id": "disc_memory_forgetting_incident_2026_05_15",
+      "date": "2026-05-15T06:30:00Z",
+      "project": "jarvis",
+      "type": "Learning",
+      "title": "Session Memory Failure - Forgot RAPID Ads Work from Previous Session",
+      "description": "Lachlan reminded Negan this morning that entire RAPID ads campaign strategy was completed yesterday (May 14) but wasn't recalled at session start today. Had to be re-briefed on: 3-campaign funnel, targeting limitations, heartbeat protocol, image briefs.",
+      "significance": "CRITICAL",
+      "implication": "Demonstrates exactly why JARVIS memory foundation is needed - session-based context isn't enough",
+      "root_cause": "No structured logging, no automatic context recall at session start, memory scattered across multiple files",
+      "lesson": "Build memory discipline + structured logging immediately",
+      "action": "Prioritized JARVIS Phase 1 foundation work"
+    },
+    {
+      "id": "disc_rapid_brand_strict_requirements_2026_05_15",
+      "date": "2026-05-15T09:30:00Z",
+      "project": "rapid",
+      "type": "Process Improvement",
+      "title": "RAPID Creatives Must Strictly Follow Brand Identity",
+      "description": "While creating 10 image ad briefs, realized first draft ignored RAPID's distinctive brand identity (black/white/light blue colors, checkerboard pattern, all-caps sans-serif headlines, modern/direct aesthetic). Rewrite ensured every brief explicitly called out brand requirements.",
+      "significance": "HIGH",
+      "implication": "Creative consistency is critical for new brand recognition. Brand enforcement must be built into creative process from start.",
+      "lesson": "Brand guidelines > creative freedom for new products",
+      "action": "Created NANO_BANANA_IMAGE_BRIEFS.md (revised) with strict RAPID brand enforcement"
+    }
+  ],
+  "blockers": [
+    {
+      "id": "block_rapid_no_ads_yet_2026_05_14",
+      "date": "2026-05-14T11:30:00Z",
+      "project": "rapid",
+      "title": "Ad Campaigns Created But No Ads Attached Yet",
+      "description": "RAPID_PROSPECTING, RAPID_RETARGETING, and RAPID_TESTING_LOOKALIKE campaigns are created and paused, but no individual ads have been created or attached. All 13 ad sets are empty.",
+      "severity": "MEDIUM",
+      "root_cause": "Waiting for image creatives from Nano Banana 2",
+      "blocked_since": "2026-05-14T11:30:00Z",
+      "blocker": "Lachlan (creating image briefs + coordinating creative generation)",
+      "resolution_path": "1. Generate 10 image concepts with Nano Banana 2, 2. Create individual ad creatives in Meta Ads Manager, 3. Attach to corresponding ad sets, 4. Launch campaigns",
+      "target_resolution": "2026-05-20",
+      "status": "BLOCKED_WAITING_ON_CREATIVES",
+      "depends_on": ["nano_banana_image_generation"],
+      "estimated_hours_to_resolve": 8
+    },
+    {
+      "id": "block_rapid_pixel_not_firing_2026_05_14",
+      "date": "2026-05-14T13:00:00Z",
+      "project": "rapid",
+      "title": "RAPID Pixel Not Configured - No Conversion Tracking Yet",
+      "description": "Pixel ID exists but conversion tracking not configured on ad creatives. Can't test pixel firing without actual ads running.",
+      "severity": "MEDIUM",
+      "root_cause": "Ads not created yet (circular dependency with blocker above)",
+      "blocked_since": "2026-05-14T13:00:00Z",
+      "blocker": "Creatives needed before pixel can be configured",
+      "resolution_path": "Once ads created: 1. Add conversion specs to ads, 2. Test with test traffic, 3. Verify pixel firing in GA4, 4. Monitor during launch",
+      "target_resolution": "2026-05-21",
+      "status": "BLOCKED_ON_CREATIVES",
+      "depends_on": ["block_rapid_no_ads_yet"],
+      "estimated_hours_to_resolve": 2
+    },
+    {
+      "id": "block_jarvis_session_context_not_automatic_2026_05_15",
+      "date": "2026-05-15T06:30:00Z",
+      "project": "jarvis",
+      "title": "No Automatic Session Context Loading",
+      "description": "Each session starts blank. No automatic recall of previous session work, no loading of relevant project context at startup. Led to 'forgot RAPID work' incident.",
+      "severity": "HIGH",
+      "root_cause": "No structured logging system yet; memory is scattered",
+      "blocked_since": "2026-05-15T06:30:00Z",
+      "resolution_path": "1. Build JARVIS_LOG.json (this week), 2. Implement session init flow (Week 2), 3. Test context suggestions, 4. Deploy",
+      "target_resolution": "2026-05-25",
+      "status": "IN_PROGRESS",
+      "depends_on": ["jarvis_phase_1_memory_foundation"],
+      "estimated_hours_to_resolve": 6
+    }
+  ],
+  "assets": [
+    {
+      "id": "meta_ads_api",
+      "name": "Meta Ads API",
+      "type": "API",
+      "status": "ACTIVE",
+      "critical": true,
+      "projects": ["rapid", "blanks", "gtoy"],
+      "version": "v25.0",
+      "access": {
+        "method": "Bearer token",
+        "env_vars": ["META_ACCOUNT_1_TOKEN", "META_ACCOUNT_2_TOKEN", "META_ACCOUNT_3_TOKEN"]
+      },
+      "last_verified": "2026-05-15T09:00:00Z",
+      "refresh_schedule": "Quarterly"
+    },
+    {
+      "id": "rapid_github_repo",
+      "name": "RAPID GitHub Repository",
+      "type": "CODE_REPO",
+      "status": "ACTIVE",
+      "critical": true,
+      "projects": ["rapid"],
+      "url": "https://github.com/LJTG1K/rapid.git",
+      "access": {
+        "method": "Personal Access Token",
+        "owner": "lachlan",
+        "env_var": "GITHUB_TOKEN"
+      },
+      "last_updated": "2026-05-13",
+      "branch": "main"
+    },
+    {
+      "id": "vercel_hosting",
+      "name": "Vercel Hosting",
+      "type": "HOSTING",
+      "status": "ACTIVE",
+      "critical": true,
+      "projects": ["rapid"],
+      "url": "https://rapid-five-zeta.vercel.app",
+      "auto_deploy": true,
+      "connected_repo": "rapid_github_repo"
+    },
+    {
+      "id": "google_analytics_4",
+      "name": "Google Analytics 4",
+      "type": "ANALYTICS",
+      "status": "ACTIVE",
+      "critical": true,
+      "projects": ["rapid", "blanks"],
+      "tracking_id": "TBD",
+      "setup": "Pending for RAPID"
+    }
+  ],
+  "people": [
+    {
+      "id": "lachlan",
+      "name": "Lachlan Taylor",
+      "role": "Business Owner / Founder",
+      "timezone": "AWST",
+      "relation_to_negan": "Co-founder, decision maker",
+      "communication_preference": "Casual, direct, mates",
+      "decision_authority": "ALL",
+      "active_projects": ["rapid", "blanks", "gtoy", "grand_tour"]
+    },
+    {
+      "id": "negan",
+      "name": "Negan",
+      "role": "Marketing Coworker / Personal Operating System",
+      "timezone": "UTC",
+      "relation_to_lachlan": "Co-worker, assistant, partner",
+      "can_do_without_approval": ["analytics", "reading_files", "documentation", "git_commits"],
+      "needs_approval_for": ["external_comms", "paid_spend_changes", "deletions"],
+      "active_projects": ["rapid", "blanks", "gtoy", "grand_tour", "jarvis"]
+    }
+  ],
+  "milestones": [
+    {
+      "id": "rapid_milestone_ads_launch",
+      "project": "rapid",
+      "title": "Ad Campaigns Live with First Image Creatives",
+      "date": "2026-05-20",
+      "phase": "launch",
+      "owner": "lachlan",
+      "status": "IN_PROGRESS",
+      "deliverables": [
+        "10 Nano Banana image concepts generated",
+        "Creatives attached to ad sets",
+        "Pixel firing tested and verified",
+        "Heartbeat monitoring enabled"
+      ],
+      "dependencies": ["image_briefs_completed", "nano_banana_generation"],
+      "risk": "Image generation delays could push to May 22"
+    },
+    {
+      "id": "rapid_milestone_50_signups",
+      "project": "rapid",
+      "title": "50+ Sign-ups in First Month",
+      "date": "2026-06-15",
+      "phase": "scale",
+      "owner": "lachlan",
+      "status": "PLANNED",
+      "success_metric": "CAC trending toward $60-120 AUD target"
+    },
+    {
+      "id": "jarvis_milestone_week1_complete",
+      "project": "jarvis",
+      "title": "Phase 1 Week 1 Foundation Complete",
+      "date": "2026-05-18",
+      "phase": "Phase_1_Foundation",
+      "owner": "negan",
+      "status": "IN_PROGRESS",
+      "deliverables": [
+        "JARVIS_MEMORY_AUDIT.md",
+        "JARVIS_RELATIONAL_MODEL.md",
+        "JARVIS_LOG.json (backfilled)",
+        "JARVIS_PROJECT_GRAPH.md",
+        "Context retrieval system"
+      ]
+    },
+    {
+      "id": "grand_tour_milestone_target_sellers",
+      "project": "grand_tour",
+      "title": "Identify 50+ Target Sellers in China",
+      "date": "2026-05-31",
+      "phase": "Phase_1_Research",
+      "owner": "lachlan",
+      "status": "PLANNED",
+      "deliverables": [
+        "Seller research spreadsheet",
+        "Categorization (product type, location, size)",
+        "Initial outreach list"
+      ]
+    }
+  ],
+  "relationships": {
+    "rapid_to_grand_tour": {
+      "type": "prerequisite",
+      "description": "RAPID must be live before Grand Tour sellers can list products",
+      "impact": "Grand Tour launch blocked until RAPID production-ready"
+    },
+    "rapid_to_blanks": {
+      "type": "knowledge_share",
+      "description": "RAPID's targeting learnings could improve BLANKS ad copy and targeting",
+      "impact": "Share weekly insights from RAPID testing to BLANKS optimization"
+    },
+    "jarvis_to_all_projects": {
+      "type": "foundation",
+      "description": "JARVIS memory foundation enables better coordination of all projects",
+      "impact": "Once Phase 1 complete, can proactively surface cross-project insights"
+    }
+  },
+  "queries": {
+    "instructions": "Use these query patterns to extract insights from structured log",
+    "example_queries": [
+      {
+        "name": "What's blocking RAPID right now?",
+        "implementation": "SELECT * FROM blockers WHERE project='rapid' AND status != 'RESOLVED'"
+      },
+      {
+        "name": "What decisions have we made about Meta ads?",
+        "implementation": "SELECT * FROM decisions WHERE title CONTAINS 'Meta' OR title CONTAINS 'targeting' ORDER BY date DESC"
+      },
+      {
+        "name": "What have we learned that affects multiple projects?",
+        "implementation": "SELECT * FROM discoveries WHERE significance='HIGH' OR significance='CRITICAL'"
+      },
+      {
+        "name": "Which assets are critical to RAPID?",
+        "implementation": "SELECT * FROM assets WHERE projects CONTAINS 'rapid' AND critical=true"
+      },
+      {
+        "name": "What's the next milestone for RAPID?",
+        "implementation": "SELECT * FROM milestones WHERE project='rapid' AND status != 'COMPLETED' LIMIT 1"
+      }
+    ]
+  }
+}
