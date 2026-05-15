@@ -36,6 +36,7 @@
 
 .face-container.fullscreen-mode .face-text {
   font-size: 12rem;
+  line-height: 1.2;
 }
 
 .face-container.fullscreen-mode .fullscreen-toggle {
@@ -62,63 +63,35 @@
 /* Face Card */
 .face-card {
   background: #1e293b;
-  border: 3px solid #7C3AED;
+  border: 3px solid #06b6d4;
   border-radius: 12px;
-  padding: 3rem;
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  box-shadow: 0 0 30px rgba(124, 58, 237, 0.15);
+  justify-content: center;
+  gap: 1rem;
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
   transition: all 0.3s ease;
+  min-height: 300px;
 }
 
 .face-card:hover {
-  box-shadow: 0 0 50px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 0 50px rgba(6, 182, 212, 0.3);
+  border-color: #0891b2;
 }
 
 /* Emoticon Text */
 .face-text {
   font-size: 8rem;
   line-height: 1;
+  color: #06b6d4;
   display: inline-block;
   font-weight: bold;
   transition: all 0.3s ease;
-}
-
-/* Status Indicator */
-.face-status {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  justify-content: center;
-}
-
-.status-label {
-  font-weight: 700;
-  font-size: 0.875rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.status-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  animation: pulse-dot 2s infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.2);
-  }
+  text-align: center;
+  letter-spacing: 0.1em;
+  white-space: pre;
 }
 
 /* Fullscreen Toggle Button */
@@ -141,24 +114,11 @@
 .fullscreen-toggle:hover {
   background: #0891b2;
   border-color: #06b6d4;
+  transform: translateY(-1px);
 }
 
 .fullscreen-toggle:active {
   transform: scale(0.98);
-}
-
-/* Footer Notes */
-.face-footer {
-  color: #64748b;
-  font-size: 0.8rem;
-  text-align: center;
-  padding: 1rem;
-  border-top: 1px solid #334155;
-  line-height: 1.6;
-}
-
-.footer-note {
-  margin: 0;
 }
 
 /* Responsive for small screens (Dockmate) */
@@ -182,8 +142,8 @@
   }
 
   .face-card {
-    padding: 1.5rem;
-    gap: 1rem;
+    padding: 1.5rem 1rem;
+    min-height: 200px;
   }
 
   .fullscreen-toggle {
@@ -203,9 +163,6 @@
 
   .face-card {
     padding: 1rem;
-  }
-
-  .status-label {
-    font-size: 0.75rem;
+    min-height: 150px;
   }
 }

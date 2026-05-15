@@ -3,29 +3,61 @@
 import { useState, useEffect, useRef } from 'react'
 import './face.css'
 
-type FaceState = 'happy' | 'surprised' | 'sad' | 'thinking'
+type FaceState =
+  | 'happy'
+  | 'very_happy'
+  | 'laughing'
+  | 'sad'
+  | 'crying'
+  | 'surprised'
+  | 'shocked'
+  | 'thinking'
+  | 'confused'
+  | 'skeptical'
+  | 'angry'
+  | 'annoyed'
+  | 'winking'
+  | 'silly'
+  | 'cool'
+  | 'neutral'
+  | 'tired'
+  | 'content'
+  | 'disappointed'
+  | 'nervous'
+  | 'embarrassed'
+  | 'tongue_out'
+  | 'kiss'
+  | 'drooling'
+  | 'smirk'
+  | 'unimpressed'
 
 const stateConfig = {
-  happy: {
-    text: ':)',
-    label: 'HAPPY',
-    color: '#10B981',
-  },
-  surprised: {
-    text: ':O',
-    label: 'SURPRISED',
-    color: '#06B6D4',
-  },
-  sad: {
-    text: ':(',
-    label: 'SAD',
-    color: '#EF4444',
-  },
-  thinking: {
-    text: ':|',
-    label: 'THINKING',
-    color: '#FFB84D',
-  },
+  happy: { text: ':)' },
+  very_happy: { text: ':D' },
+  laughing: { text: 'XD' },
+  sad: { text: ':(' },
+  crying: { text: 'T_T' },
+  surprised: { text: ':O' },
+  shocked: { text: 'o_o' },
+  thinking: { text: ':|' },
+  confused: { text: ':S' },
+  skeptical: { text: ':/' },
+  angry: { text: '>:(' },
+  annoyed: { text: ':@' },
+  winking: { text: ';)' },
+  silly: { text: ':P' },
+  cool: { text: 'B)' },
+  neutral: { text: ':-]' },
+  tired: { text: '-_-' },
+  content: { text: '^_^' },
+  disappointed: { text: ':v' },
+  nervous: { text: '^_^;' },
+  embarrassed: { text: '^^;' },
+  tongue_out: { text: 'XP' },
+  kiss: { text: ':*' },
+  drooling: { text: ':~)' },
+  smirk: { text: ':-}' },
+  unimpressed: { text: '>.>' },
 }
 
 const getRandomDelay = () => {
@@ -40,7 +72,7 @@ export default function NeganFace() {
   // Random state cycling
   useEffect(() => {
     const changeState = () => {
-      const states: FaceState[] = ['happy', 'surprised', 'sad', 'thinking']
+      const states = Object.keys(stateConfig) as FaceState[]
       const randomIndex = Math.floor(Math.random() * states.length)
       setCurrentState(states[randomIndex])
     }
@@ -86,37 +118,17 @@ export default function NeganFace() {
     <div className={`face-container ${isFullscreen ? 'fullscreen-mode' : ''}`} ref={containerRef}>
       <div className="face-layout">
         <div className="face-main">
-          <div className="face-card" style={{ borderColor: config.color }}>
-            <div className="face-text" style={{ color: config.color }}>
-              {config.text}
-            </div>
-
-            <div className="face-status">
-              <div className="status-label" style={{ color: config.color }}>
-                {config.label}
-              </div>
-              <div className="status-dot" style={{ backgroundColor: config.color }}></div>
-            </div>
+          <div className="face-card">
+            <div className="face-text">{config.text}</div>
           </div>
 
-          <button
-            className="fullscreen-toggle"
-            onClick={toggleFullscreen}
-            title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-          >
-            {isFullscreen ? '⤡ Exit FS' : '⛶ Fullscreen'}
-          </button>
+          {!isFullscreen && (
+            <button className="fullscreen-toggle" onClick={toggleFullscreen} title="Enter fullscreen">
+              ⛶ Fullscreen
+            </button>
+          )}
         </div>
       </div>
-
-      {!isFullscreen && (
-        <div className="face-footer">
-          <p className="footer-note">
-            <strong>Negan on the Desk</strong><br />
-            Emoticon mood indicator
-          </p>
-        </div>
-      )}
     </div>
   )
 }
