@@ -3,13 +3,8 @@ import { NextRequest, NextResponse } from 'next/server'
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
-  // Allow auth pages and API routes
+  // Allow auth pages
   if (pathname.startsWith('/(auth)') || pathname === '/login' || pathname.startsWith('/api/auth')) {
-    return NextResponse.next()
-  }
-
-  // Allow Negan Face state APIs (auth via x-negan-key header)
-  if (pathname === '/api/session-status' || pathname === '/api/subagents') {
     return NextResponse.next()
   }
 
@@ -28,7 +23,5 @@ export const config = {
   matcher: [
     '/',
     '/projects/:path*',
-    '/api/session-status',
-    '/api/subagents',
   ],
 }
