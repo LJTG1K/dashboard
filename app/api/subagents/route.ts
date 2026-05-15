@@ -7,22 +7,16 @@ let subagentState = {
   lastUpdated: Date.now(),
 }
 
-function isLocalhost(request: NextRequest): boolean {
-  const host = request.headers.get('host') || ''
-  const forwarded = request.headers.get('x-forwarded-for')
-  const clientIp = forwarded ? forwarded.split(',')[0].trim() : ''
-  
-  return (
-    host.startsWith('localhost') ||
-    host.startsWith('127.0.0.1') ||
-    clientIp === '127.0.0.1' ||
-    clientIp.startsWith('::1')
-  )
+const INTERNAL_API_KEY = 'negan-face-internal-api'
+
+function hasValidInternalKey(request: NextRequest): boolean {
+  const key = request.headers.get('x-negan-key')
+  return key === INTERNAL_API_KEY
 }
 
 export async function GET(request: NextRequest) {
-  // Allow localhost requests to bypass auth
-  if (!isLocalhost(request)) {
+  // Allow requests with internal API key
+  if (!hasValidInternalKey(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   try {
@@ -57,8 +51,8 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // Allow localhost requests to bypass auth
-  if (!isLocalhost(request)) {
+  // Allow requests with internal API key
+  if (!hasValidInternalKey(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   try {

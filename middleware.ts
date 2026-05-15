@@ -2,16 +2,14 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
-  const host = request.headers.get('host') || ''
-  const isLocalhost = host.startsWith('localhost') || host.startsWith('127.0.0.1')
   
   // Allow auth pages and API routes
   if (pathname.startsWith('/(auth)') || pathname === '/login' || pathname.startsWith('/api/auth')) {
     return NextResponse.next()
   }
 
-  // Allow Negan Face state APIs from localhost (for main session updates)
-  if (isLocalhost && (pathname === '/api/session-status' || pathname === '/api/subagents')) {
+  // Allow Negan Face state APIs (auth via x-negan-key header)
+  if (pathname === '/api/session-status' || pathname === '/api/subagents') {
     return NextResponse.next()
   }
 
