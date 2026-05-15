@@ -6,7 +6,7 @@ import './face.css'
 type FaceState = 'thinking' | 'waiting' | 'deploying' | 'typing' | 'listening' | 'alert' | 'idle'
 
 interface SessionStatus {
-  status: 'running' | 'waiting' | 'idle'
+  status: 'running' | 'waiting' | 'idle' | 'offline'
   lastMessageTime?: number
   currentTask?: string
   model?: string
