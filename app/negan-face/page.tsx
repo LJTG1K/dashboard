@@ -1,9 +1,50 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './face.css'
 
 type FaceState = 'thinking' | 'waiting' | 'deploying' | 'typing' | 'listening' | 'alert' | 'idle'
+
+interface SessionStatus {
+  status: 'running' | 'waiting' | 'idle'
+  lastMessageTime?: number
+  currentTask?: string
+  model?: string
+  sessionTime?: number
+  subagentCount?: number
+}
+
+interface SubagentInfo {
+  status: 'running' | 'completed' | 'failed'
+  count: number
+}
+
+const determineState = (
+  sessionStatus: SessionStatus | null,
+  subagentInfo: SubagentInfo | null,
+  isWaitingOnUser: boolean
+): FaceState => {
+  // If no session status, idle
+  if (!sessionStatus) return 'idle'
+
+  // If subagents running, deploying
+  if (subagentInfo?.count ?? 0 > 0) return 'deploying'
+
+  // If waiting on user response, waiting
+  if (isWaitingOnUser) return 'waiting'
+
+  // If status is running, thinking
+  if (sessionStatus.status === 'running') return 'thinking'
+
+  // If last message was just sent, typing
+  const now = Date.now()
+  if (sessionStatus.lastMessageTime && now - sessionStatus.lastMessageTime < 5000) {
+    return 'typing'
+  }
+
+  // Default to listening
+  return 'listening'
+}
 
 const stateConfig = {
   thinking: {
@@ -60,23 +101,109 @@ const stateConfig = {
 export default function NeganFace() {
   const [currentState, setCurrentState] = useState<FaceState>('listening')
   const [showStateList, setShowStateList] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [sessionStatus, setSessionStatus] = useState<SessionStatus | null>(null)
+  const [subagentInfo, setSubagentInfo] = useState<SubagentInfo | null>(null)
+  const [isWaitingOnUser, setIsWaitingOnUser] = useState(false)
+  const [lastUserMessageTime, setLastUserMessageTime] = useState<number | null>(null)
+  const [statusText, setStatusText] = useState('Connecting...')
+  const containerRef = useRef<HTMLDivElement>(null)
+  const pollIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Auto-cycle through states on interval (for demo)
+  // Poll for real session status every 2 seconds
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const states: FaceState[] = ['listening', 'thinking', 'typing', 'waiting', 'deploying', 'alert', 'idle']
-      const currentIndex = states.indexOf(currentState)
-      const nextIndex = (currentIndex + 1) % states.length
-      setCurrentState(states[nextIndex])
-    }, 5000) // Change state every 5 seconds
+    const pollSessionStatus = async () => {
+      try {
+        // Fetch session status via API
+        const response = await fetch('/api/session-status')
+        if (!response.ok) throw new Error('Failed to fetch session status')
+        
+        const data: SessionStatus = await response.json()
+        setSessionStatus(data)
 
-    return () => clearTimeout(timer)
-  }, [currentState])
+        // Update status text
+        if (data.currentTask) {
+          setStatusText(data.currentTask)
+        } else {
+          setStatusText(`Session active • ${data.sessionTime ? Math.floor(data.sessionTime / 60) : 0}m`)
+        }
+      } catch (error) {
+        console.error('Error polling session status:', error)
+        setStatusText('Offline')
+      }
+    }
+
+    const pollSubagents = async () => {
+      try {
+        const response = await fetch('/api/subagents')
+        if (!response.ok) throw new Error('Failed to fetch subagents')
+        
+        const data: SubagentInfo = await response.json()
+        setSubagentInfo(data)
+      } catch (error) {
+        console.error('Error polling subagents:', error)
+      }
+    }
+
+    // Initial poll
+    pollSessionStatus()
+    pollSubagents()
+
+    // Set up interval
+    pollIntervalRef.current = setInterval(() => {
+      pollSessionStatus()
+      pollSubagents()
+    }, 2000)
+
+    return () => {
+      if (pollIntervalRef.current) clearInterval(pollIntervalRef.current)
+    }
+  }, [])
+
+  // Determine state based on real data
+  useEffect(() => {
+    const newState = determineState(sessionStatus, subagentInfo, isWaitingOnUser)
+    setCurrentState(newState)
+  }, [sessionStatus, subagentInfo, isWaitingOnUser])
+
+  const toggleFullscreen = async () => {
+    if (!containerRef.current) return
+
+    try {
+      if (!isFullscreen) {
+        if (containerRef.current.requestFullscreen) {
+          await containerRef.current.requestFullscreen()
+          setIsFullscreen(true)
+        }
+      } else {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen()
+          setIsFullscreen(false)
+        }
+      }
+    } catch (error) {
+      console.error('Fullscreen error:', error)
+    }
+  }
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement)
+    }
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
+  }, [])
 
   const config = stateConfig[currentState]
+  
+  // Format session details
+  const sessionTimeStr = sessionStatus?.sessionTime
+    ? `${Math.floor(sessionStatus.sessionTime / 3600)}h ${Math.floor((sessionStatus.sessionTime % 3600) / 60)}m`
+    : 'N/A'
 
   return (
-    <div className="face-container">
+    <div className={`face-container ${isFullscreen ? 'fullscreen-mode' : ''}`} ref={containerRef}>
       <div className="face-layout">
         {/* Main Face Display */}
         <div className="face-main">
@@ -93,33 +220,45 @@ export default function NeganFace() {
             </div>
 
             <div className="face-message">
-              {config.message}
+              {statusText || config.message}
             </div>
 
             {/* Mini Details */}
             <div className="face-details">
               <div className="detail-row">
                 <span className="detail-icon">⏱️</span>
-                <span className="detail-text">Session Active • 2h 14m</span>
+                <span className="detail-text">Session • {sessionTimeStr}</span>
               </div>
               <div className="detail-row">
                 <span className="detail-icon">🔗</span>
-                <span className="detail-text">Connected • AWST (UTC+8)</span>
+                <span className="detail-text">{sessionStatus ? '🟢 Live' : '⚫ Offline'} • AWST (UTC+8)</span>
               </div>
-              <div className="detail-row">
-                <span className="detail-icon">💾</span>
-                <span className="detail-text">Memory Updated • 12:34</span>
-              </div>
+              {subagentInfo && subagentInfo.count > 0 && (
+                <div className="detail-row">
+                  <span className="detail-icon">🚀</span>
+                  <span className="detail-text">{subagentInfo.count} subagent{subagentInfo.count !== 1 ? 's' : ''} running</span>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Quick Control Button */}
-          <button
-            className="state-toggle"
-            onClick={() => setShowStateList(!showStateList)}
-          >
-            {showStateList ? '✕ Close' : '⋮ States'}
-          </button>
+          {/* Control Buttons */}
+          <div className="control-buttons">
+            <button
+              className="state-toggle"
+              onClick={() => setShowStateList(!showStateList)}
+              title="Toggle state list"
+            >
+              {showStateList ? '✕ Close' : '⋮ States'}
+            </button>
+            <button
+              className="fullscreen-toggle"
+              onClick={toggleFullscreen}
+              title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            >
+              {isFullscreen ? '⤡ Exit FS' : '⛶ Fullscreen'}
+            </button>
+          </div>
         </div>
 
         {/* State List (Sidebar) */}
@@ -149,12 +288,14 @@ export default function NeganFace() {
       </div>
 
       {/* Footer Notes */}
-      <div className="face-footer">
-        <p className="footer-note">
-          <strong>Negan on the Desk</strong><br />
-          Real-time state reflection. Live tracking coming soon.
-        </p>
-      </div>
+      {!isFullscreen && (
+        <div className="face-footer">
+          <p className="footer-note">
+            <strong>Negan on the Desk</strong><br />
+            Real-time state reflection. Live tracking coming soon.
+          </p>
+        </div>
+      )}
     </div>
   )
 }

@@ -8,6 +8,57 @@
   flex-direction: column;
   gap: 2rem;
   font-family: 'Monaco', 'Menlo', monospace;
+  transition: all 0.3s ease;
+}
+
+.face-container.fullscreen-mode {
+  padding: 0;
+  max-width: 100%;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  gap: 0;
+}
+
+.face-container.fullscreen-mode .face-layout {
+  height: 100%;
+  flex: 1;
+}
+
+.face-container.fullscreen-mode .face-main {
+  height: 100%;
+  justify-content: center;
+}
+
+.face-container.fullscreen-mode .face-card {
+  padding: 3rem;
+}
+
+.face-container.fullscreen-mode .face-emoji {
+  font-size: 8rem;
+}
+
+.face-container.fullscreen-mode .status-label {
+  font-size: 1.25rem;
+}
+
+.face-container.fullscreen-mode .face-message {
+  font-size: 1.25rem;
+}
+
+.face-container.fullscreen-mode .control-buttons {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  gap: 1rem;
+}
+
+.face-container.fullscreen-mode .state-list {
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  max-height: 60vh;
+  z-index: 1000;
 }
 
 /* Main Layout */
@@ -127,8 +178,16 @@
   flex: 1;
 }
 
+/* Control Buttons */
+.control-buttons {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
 /* State Toggle Button */
 .state-toggle {
+  flex: 1;
   background: #334155;
   color: #e2e8f0;
   border: 1px solid #475569;
@@ -141,7 +200,6 @@
   transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  width: 100%;
 }
 
 .state-toggle:hover {
@@ -150,6 +208,32 @@
 }
 
 .state-toggle:active {
+  transform: scale(0.98);
+}
+
+/* Fullscreen Toggle Button */
+.fullscreen-toggle {
+  flex: 1;
+  background: #06b6d4;
+  color: #0f172a;
+  border: 1px solid #0891b2;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fullscreen-toggle:hover {
+  background: #0891b2;
+  border-color: #06b6d4;
+}
+
+.fullscreen-toggle:active {
   transform: scale(0.98);
 }
 
@@ -339,6 +423,10 @@
   .detail-row {
     font-size: 0.75rem;
   }
+
+  .control-buttons {
+    flex-direction: column;
+  }
 }
 
 /* Very small screens */
@@ -366,6 +454,10 @@
   .face-details {
     display: none;
   }
+
+  .control-buttons {
+    flex-direction: column;
+  }
 }
 
 /* Scrollbar styling for state list */
@@ -385,4 +477,20 @@
 
 .state-list::-webkit-scrollbar-thumb:hover {
   background: #64748b;
+}
+
+/* Fullscreen mode optimizations */
+@media (max-width: 1024px) {
+  .face-container.fullscreen-mode .face-card {
+    padding: 2.5rem;
+  }
+
+  .face-container.fullscreen-mode .face-emoji {
+    font-size: 7rem;
+  }
+
+  .face-container.fullscreen-mode .control-buttons {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
 }
