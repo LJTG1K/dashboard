@@ -19,6 +19,30 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    code: 'PROJECT_SCUMBAG',
+    name: 'Project Scumbag — Private Income Streams',
+    emoji: '💰',
+    description: 'Brainstorm and execute income paths we can build together as AI and person',
+    status: 'optimizing',
+    priority: 'HIGH',
+    lastUpdate: '2026-05-19',
+    metrics: [
+      { label: 'Status', value: 'Ideation Phase' },
+      { label: 'Scope', value: 'Separate from G1K' },
+      { label: 'Timeline', value: '3 weeks (validate → execute)' },
+      { label: 'Confidentiality', value: 'Private (Lachlan + Negan)' },
+    ],
+    nextSteps: [
+      'Brainstorm income stream ideas',
+      'Validate market demand (week 1)',
+      'Pick top 3 ideas and test (week 2)',
+      'Execute on winner (week 3)',
+    ],
+    resources: [
+      { label: 'README', url: '/docs/PROJECT_SCUMBAG/README.md' },
+    ],
+  },
+  {
     code: 'JARVIS',
     name: 'Negan Evolution — Personal Operating System',
     emoji: '🤖',
@@ -78,6 +102,7 @@ export const projects: Project[] = [
     resources: [
       { label: 'Live Site', url: 'https://rapid-five-zeta.vercel.app/listings' },
       { label: 'GitHub', url: 'https://github.com/LJTG1K/rapid.git' },
+      { label: '🎨 Landing Page Design Concepts (3 Versions)', url: '/docs/RAPID/LANDING_PAGE_DESIGNS.md' },
       { label: '📺 Paid Ad Concepts (Cold Audience)', url: '/docs/RAPID/CREATIVE_CONCEPTS_PAID_ADS.md' },
       { label: '📺 Organic Concepts (Educational @gilly1k)', url: '/docs/RAPID/CREATIVE_CONCEPTS_REVISED.md' },
       { label: '📺 Hype Concepts (Original)', url: '/docs/RAPID/CREATIVE_CONCEPTS.md' },
